@@ -38,5 +38,7 @@ WORKDIR /notebooks
 RUN apt install -y git cmake
 COPY install_opencv_with_gstreamer.sh /notebooks/
 RUN ./install_opencv_with_gstreamer.sh
+RUN pip install git+https://github.com/ytdl-org/youtube-dl.git@master#egg=youtube_dl
+RUN pip install matplotlib
 
 CMD ["/root/miniconda3/bin/jupyter","notebook", "--allow-root"]
