@@ -72,17 +72,11 @@ int main(int argc, char *argv[])
   
 
   /* Set the pipeline to "playing" state */
-  g_print("Now playing...\n");
   gst_element_set_state(pipeline, GST_STATE_PLAYING);
-
   /* Iterate */
-  g_print("Running...\n");
   g_main_loop_run(loop);
-
   /* Out of the main loop, clean up nicely */
-  g_print("Returned, stopping playback\n");
   gst_element_set_state(pipeline, GST_STATE_NULL);
-  g_print("Deleting pipeline\n");
   gst_object_unref(GST_OBJECT(pipeline));
   g_main_loop_unref(loop);
   return 0;
