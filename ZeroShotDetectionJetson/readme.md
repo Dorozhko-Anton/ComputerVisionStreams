@@ -25,7 +25,7 @@ sudo apt update
 sudo apt install nvidia-jetson-services
 ```
 
-1. Download `zero_shot_detection-1.1.0.tar.gz` 
+1. Download `zero_shot_detection-2.0.0.tar.gz` 
 
 ```bash
 wget --content-disposition 'https://api.ngc.nvidia.com/v2/resources/org/nvidia/team/jps/reference-workflow-and-resources/2.0.0/files?redirect=true&path=zero_shot_detection-2.0.0.tar.gz' -O zero_shot_detection-2.0.0.tar.gz
