@@ -2,6 +2,11 @@
 
 docs: https://docs.nvidia.com/jetson/jps/inference-services/zero_shot_detection.html 
 
+
+Other links:
+1. https://github.com/NVIDIA-AI-IOT/nanoowl
+2. https://arxiv.org/pdf/2205.06230 
+
 Open vocabulary (classes defined at runtime, through CLIP embeddings) detections
 
 Input: video live stream
@@ -76,8 +81,25 @@ add detection classes (thresholds 0.1 - 2.0)
 curl --location 'http://192.168.1.66:5010/api/v1/detection/classes' \
 --header 'Content-Type: application/json' \
 --data '{
+    "objects": ["a person", "a car", "a bus"],
+    "thresholds": [0.1, 0.3, 0.3],
+    "id": "{$STREAM_ID}"
+}'
+
+
+curl --location 'http://192.168.1.66:5010/api/v1/detection/classes' \
+--header 'Content-Type: application/json' \
+--data '{
     "objects": ["a person", "a car", "a bus", "a tree", "building", "a shadow"],
     "thresholds": [0.1, 0.3, 0.3, 0.05, 0.05, 0.05],
+    "id": "{$STREAM_ID}"
+}'
+
+curl --location 'http://192.168.1.66:5010/api/v1/detection/classes' \
+--header 'Content-Type: application/json' \
+--data '{
+    "objects": ["black car", "white car", "gray car", "red car", "red jacket", "backpack"],
+    "thresholds": [0.05, 0.05, 0.05, 0.05, 0.03, 0.05],
     "id": "{$STREAM_ID}"
 }'
 ```
