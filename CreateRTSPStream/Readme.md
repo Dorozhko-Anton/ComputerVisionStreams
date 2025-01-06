@@ -100,3 +100,13 @@ https://github.com/bluenviron/mediamtx
 # RTSP test stream 
 
 https://rtsp.stream/posts/opening-rtsp-stream-using-vlc-gstreamer-ffmpeg
+
+
+
+
+# Configurations to adjust 
+
+
+## VST
+
+number of WebRTC streams (default is 1)
