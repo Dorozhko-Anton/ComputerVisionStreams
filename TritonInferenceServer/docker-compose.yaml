@@ -1,0 +1,42 @@
+services:
+  triton:
+    image: nvcr.io/nvidia/tritonserver:24.06-py3
+    runtime: nvidia 
+    ports:
+    - 8000:8000 # http
+    - 8001:8001 # grpc
+    - 8002:8002 # metrics
+    volumes:
+    - $PWD/model_repository:/models
+    entrypoint: tritonserver --model-repository=/models
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+    restart: unless-stopped
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prom_data:/prometheus
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+    # - GF_SERVER_ROOT_URL=http://my.grafana.server/
+      - GF_INSTALL_PLUGINS=grafana-clock-panel  1.0.1
+    # if you are running as root then set it to 0
+    # else find the right id with the id -u command
+    user: '0'
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+      - '$PWD/data:/var/lib/grafana'
+volumes:
+  prom_data:
