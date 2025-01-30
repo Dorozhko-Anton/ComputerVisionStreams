@@ -13,6 +13,20 @@ Username: "$oauthtoken"
 Password: "YOUR_NGC_API_KEY"
 ```
 
+# Run local kafka setup for dev
+
+
+# Kafka minimal setup
+
+https://github.com/provectus/kafka-ui/blob/master/documentation/compose/kafka-ui.yaml
+
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_plugin_gst-nvmsgbroker.html#configuring-protocol-settings
+
+```
+docker compose up -d
+```
+open UI http://0.0.0.0:8080 
+
 # Run docker with deepstream
 
 https://catalog.ngc.nvidia.com/orgs/nvidia/containers/deepstream 
@@ -29,19 +43,7 @@ xhost +
 docker run -it --rm --net=host --gpus all -e DISPLAY=$DISPLAY --device /dev/snd -v /tmp/.X11-unix/:/tmp/.X11-unix -v $PWD:/workspace deepstream:7.0 bash
 ```
 
-# Run local kafka setup for dev
 
-
-# Kafka minimal setup
-
-https://github.com/provectus/kafka-ui/blob/master/documentation/compose/kafka-ui.yaml
-# https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_plugin_gst-nvmsgbroker.html#configuring-protocol-settings
-
-```
-docker compose up -d
-
-0.0.0.0:8080
-```
 
 # Execute
 
