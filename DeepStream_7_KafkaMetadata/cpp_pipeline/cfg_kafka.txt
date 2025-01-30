@@ -1,0 +1,4 @@
+[message-broker]
+proto-cfg="message.timeout.ms=2000;retries=5"
+consumer-group-id = groupid
+partition-key = keyid

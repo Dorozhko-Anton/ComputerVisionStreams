@@ -1,0 +1,16 @@
+(0):disable
+(1):enable
+auto-reconnect=1
+
+#connection retry interval in seconds
+retry-interval=5
+
+#connection max retry limit in seconds
+max-retry-limit=20
+
+#interval at which to perform work, in microseconds
+work-interval=10000
+
+
+#proto-lib="/opt/nvidia/deepstream/deepstream/lib/libnvds_kafka_proto.so"
+#topic=test_topic
