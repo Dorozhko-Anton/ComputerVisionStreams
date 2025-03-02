@@ -56,6 +56,16 @@ mkdir debug-payload
 ./my-deepstream-app file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4
 
 GST_DEBUG=*:3 ./my-deepstream-app file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4
+
+
+
+cd /workspace/cpp_pipeline/
+mkdir build && cd build && cmake .. && make
+
+mkdir debug-payload
+./my-deepstream-app file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4
+
+GST_DEBUG=*:3 ./custom-payload file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4
 ```
 
 
@@ -70,6 +80,11 @@ GST_DEBUG=*:3 ./my-deepstream-app file:///opt/nvidia/deepstream/deepstream/sampl
 pip install kafka-python-ng
 cd /workspace/kafka
 python producer_test.py
+```
+
+```bash
+docker run -it confluentinc/cp-kafka:7.2.1 bash
+kafka-console-producer --bootstrap-server 192.168.1.51:9092 -topic test {"test"}
 ```
 
 ## Install kafka in docker container ( No need for provided docker image )
@@ -128,3 +143,11 @@ description="Vehicle Detection and License Plate Recognition"
 source=OpenALR
 version=1.0
 ```
+custom json message 
+https://forums.developer.nvidia.com/t/custom-json-message/176930
+https://github.com/luchoaraya30/deepstream-custom-json-message
+
+https://github.com/NVIDIA-AI-IOT/deepstream-retail-analytics/tree/main/nvmsgconv/deepstream_schema
+
+sending images 
+https://forums.developer.nvidia.com/t/nvmsgconv-custom-payload-to-send-image-and-its-metadata-through-message-broker/69851 
