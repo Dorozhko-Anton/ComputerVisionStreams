@@ -124,12 +124,14 @@ curl -XPOST 'http://localhost:9000/api/v1/stream/remove' -d '{
 
 
 
+# Links 
 
-
-
-
-
-
+https://docs.nvidia.com/metropolis/deepstream-nvaie30/dev-guide/text/DS_plugin_gst-nvmultiurisrcbin.html 
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_plugin_gst-nvurisrcbin.html 
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_plugin_gst-nvmultiurisrcbin.html 
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_RestServer.html#nvds-rest-server 
+https://github.com/civetweb/civetweb/tree/master 
+https://github.com/CrowCpp/Crow 
 
 
 
