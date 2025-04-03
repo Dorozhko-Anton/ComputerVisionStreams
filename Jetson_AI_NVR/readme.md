@@ -239,3 +239,13 @@ docker run -d --name redisinsight -p 5540:5540 redis/redisinsight:latest -v redi
 ```
 
 http://192.168.1.66:5540/ 
+
+
+
+# Links 
+
+https://www.youtube.com/watch?v=Wth9aQkcNV8 
+
+https://docs.nvidia.com/jetson/jps/setup/ai-nvr.html
+https://catalog.ngc.nvidia.com/orgs/nvidia/teams/jps/resources/reference-workflow-and-resources/files?version=2.0.0 
+https://docs.nvidia.com/moj/deepstream/deepstream.html 
