@@ -136,6 +136,32 @@ https://github.com/CrowCpp/Crow
 
 
 
+# On the fly model update
 
 
+```bash
+# Step to run the docker
+export DISPLAY=:0
+xhost +
+docker run -it --rm --net=host --gpus all -e DISPLAY=$DISPLAY --device /dev/snd -v /tmp/.X11-unix/:/tmp/.X11-unix -v $PWD:/workspace deepstream:7.0 bash
+```
 
+```bash
+cd /workspace/ota_model_update/
+mkdir build
+cd build && cmake .. && make
+
+./ota_model_update_sample file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4
+```
+
+model update
+```bash
+cd /opt/nvidia/deepstream/deepstream/samples/models/Primary_Detector
+
+mv resnet18_trafficcamnet.etlt_b30_gpu0_int8.engine resnet18_trafficcamnet.etlt_b30_gpu0_int8.engine.bcp
+cp resnet18_trafficcamnet.etlt_b30_gpu0_int8.engine.bcp resnet18_trafficcamnet.etlt_b30_gpu0_int8.engine
+```
+
+## OTA links 
+https://docs.nvidia.com/metropolis/deepstream/dev-guide/text/DS_on_the_fly_model.html
+https://man7.org/linux/man-pages/man7/inotify.7.html
