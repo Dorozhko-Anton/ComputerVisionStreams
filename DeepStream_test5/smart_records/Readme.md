@@ -20,7 +20,7 @@ CUDA_VER=12.4 make
 run 
 
 ```bash
-export GST_PLUGIN_PATH=$GST_PLUGIN_PATH:$(pwd)
+export GST_PLUGIN_PATH=$GST_PLUGIN_PATH:/workspace/smart-record-plugin
 
 GST_DEBUG=*:3 gst-launch-1.0 filesrc location=/opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.h264 ! h264parse ! nvv4l2decoder !     identity name=rec ! nvvideoconvert ! nveglglessink
 
@@ -38,6 +38,7 @@ mkdir build && cd build && cmake .. && make
 ./OldDeepstream
 ```
 
+gst-launch-1.0 videotestsrc num-buffers=150 ! videoconvert ! x264enc ! mp4mux ! filesink location=test.mp4
 
 
 # Inspect Deepstream test 5 app 
