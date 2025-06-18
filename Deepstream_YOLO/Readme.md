@@ -20,7 +20,7 @@ conda activate yoloexport
 
 cd /workspace/build/
 git clone https://github.com/ultralytics/ultralytics
-cd /ultralytics
+cd ultralytics
 pip install -e ".[export]" onnxslim
 
 cd /workspace/build/
@@ -61,6 +61,62 @@ mkdir build && cd build && cmake .. && make
 ./OldDeepstream
 ```
 
+
+# FP16 
+
+FP32  80      FPS
+FP16  160-190 FPS
+INT8  130-275 FPS  - less accuracy
+
+
+```bash
+model-engine-file=yolo11s.pt.onnx_b1_gpu0_fp16.engine
+network-mode=2
+```
+
+
+```bash
+gst-launch-1.0 nvurisrcbin name=src uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4 file-loop=1 ! mux.sink_0 nvstreammux name=mux batch-size=1 width=1280 height=720 live-source=1 ! nvinfer name=infer config-file-path=/workspace/build/DeepStream-Yolo/config_infer_primary_yolo11.txt ! nvdslogger fps-measurement-interval-sec=1 sync=false ! nvdsosd name=osd ! fakesink name=sink sync=false
+
+
+gst-launch-1.0 nvurisrcbin name=src uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4 file-loop=1 ! mux.sink_0 nvstreammux name=mux batch-size=1 width=1280 height=720 live-source=1 ! nvinfer name=infer config-file-path=/workspace/build/DeepStream-Yolo/config_infer_primary_yolo11_fp16.txt ! nvdslogger fps-measurement-interval-sec=1 sync=false ! nvdsosd name=osd ! fakesink name=sink sync=false
+```
+
+
+# INT8
+
+
+```bash
+export OPENCV=1
+
+make -C nvdsinfer_custom_impl_Yolo clean && make -C nvdsinfer_custom_impl_Yolo
+
+
+
+wget http://images.cocodataset.org/zips/val2017.zip
+apt-get install unzip
+unzip val2017.zip
+
+mkdir calibration
+for jpg in $(ls -1 val2017/*.jpg | sort -R | head -1000); do
+  cp ${jpg} calibration/
+done
+
+realpath calibration/*jpg > calibration.txt
+
+export INT8_CALIB_IMG_PATH=calibration.txt
+export INT8_CALIB_BATCH_SIZE=1
+
+cp config_infer_primary_yolo11.txt config_infer_primary_yolo11_int8.txt
+
+# config
+model-engine-file=model_b1_gpu0_int8.engine
+int8-calib-file=calib.table
+network-mode=1
+engine-create-func-name=NvDsInferYoloCudaEngineGet
+
+gst-launch-1.0 nvurisrcbin name=src uri=file:///opt/nvidia/deepstream/deepstream/samples/streams/sample_720p.mp4 file-loop=1 ! mux.sink_0 nvstreammux name=mux batch-size=1 width=1280 height=720 live-source=1 ! nvinfer name=infer config-file-path=/workspace/build/DeepStream-Yolo/config_infer_primary_yolo11_int8.txt ! nvdslogger fps-measurement-interval-sec=1 sync=false ! nvdsosd name=osd ! fakesink name=sink sync=false
+```
 
 Links:
 1. https://wiki.seeedstudio.com/YOLOv8-DeepStream-TRT-Jetson/

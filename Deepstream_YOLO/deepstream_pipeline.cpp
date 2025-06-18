@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         config-file-path=/workspace/build/DeepStream-Yolo/config_infer_primary_yolo11.txt
       ! nvdslogger
       ! nvdsosd name=osd
-      ! nveglglessink name=sink sync=true
+      ! fakesink name=sink sync=false
       )foo";
 // ! nveglglessink name=sink sync=true
       
