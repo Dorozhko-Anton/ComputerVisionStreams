@@ -1,0 +1,106 @@
+<View>
+  <!-- Image/Video frame -->
+  <Image name="frame" value="$image"/>
+
+  
+  
+  <!-- ROI Filtering Polygon -->
+  <PolygonLabels name="roi" toName="frame" strokeWidth="2"
+                 showInline="true">
+    <Label value="ROI-Filter" background="blue"/>
+	<Label value="Overcrowding" background="red"/>
+    <View visibleWhen="region-selected"
+        whenLabelValue="ROI-Filter">
+    <!-- Inverse ROI Choice -->
+    <Choices name="roi_inverse" 
+             toName="frame" 
+             perRegion="true"
+             allowNested="true"
+             whenLabelValue="ROI-Filter">
+      <Choice value="inverse-roi=0"/>
+      <Choice value="inverse-roi=1"/>
+    </Choices>
+
+    <TextArea name="roi_name" 
+              toName="frame" 
+              editable="true" 
+              perRegion="true" 
+              required="true" 
+              visibleWhen="region-selected"
+              allowNested="true"
+              whenLabelValue="ROI-Filter"/>
+  </View>
+    
+    <View visibleWhen="region-selected"
+        whenLabelValue="Overcrowding">
+          
+       <Header value="Enter zone name:" />
+          <TextArea name="oc_name" 
+              toName="frame" 
+              editable="true" 
+              perRegion="true"
+              required="true" 
+              allowNested="true" 
+              whenLabelValue="Overcrowding"/>
+      <Header value="Enter overcrowd-threshold:" />
+  <Number name="oc_threshold" 
+          toName="frame" 
+          min="0"
+          max="100"
+          defaultValue="5"
+          perRegion="true"
+          allowNested="true"
+          required="true" 
+          slider="false"
+          whenLabelValue="Overcrowding"
+           />
+  </View>
+  </PolygonLabels>
+
+  
+  
+   <!-- Line crossing / Direction -->
+    <RectangleLabels name="rect" toName="frame" showInline="true">
+     <Label value="Direction" background="yellow"/>
+	<Label value="LineCrossing" background="cyan"/>
+      
+       <View visibleWhen="region-selected"
+        whenLabelValue="LineCrossing">
+    <!-- Line Name -->
+  <TextArea name="line_name" toName="frame" perRegion="true"
+            placeholder="Enter line name (e.g. Entry, Exit)"
+            rows="1" editable="true"
+            whenLabelValue="LineCrossing"/>
+
+  <!-- Extended Line Flag -->
+  <Choices name="line_extended" 
+           toName="frame" 
+           perRegion="true"
+           whenLabelValue="LineCrossing">
+    <Choice value="extended=0"/>
+    <Choice value="extended=1"/>
+  </Choices>
+
+  <!-- Mode Selection -->
+  <Choices name="line_mode" toName="frame" perRegion="true"
+           whenLabelValue="LineCrossing">
+    <Choice value="loose"/>
+    <Choice value="balanced"/>
+    <Choice value="strict"/>
+  </Choices>
+        </View>
+  
+  
+      <View visibleWhen="region-selected"
+        whenLabelValue="Direction">
+        
+          <TextArea name="dir_name" toName="frame" perRegion="true"
+            placeholder="Enter line name (e.g. Entry, Exit)"
+            rows="1" editable="true"
+                    whenLabelValue="Direction"/>
+  </View>
+  </RectangleLabels>
+  
+   
+
+</View>
