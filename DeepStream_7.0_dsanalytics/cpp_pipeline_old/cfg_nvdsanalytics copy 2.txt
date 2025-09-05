@@ -1,0 +1,13 @@
+[property]
+enable=1
+config-width=1280
+config-height=720
+osd-mode=2
+display-font-size=12
+
+[roi-filtering-stream-0]
+enable=1
+roi-Desk=398;467;467;559;782;495;665;357
+roi-Entrance=935;416;770;382;832;299;1068;405
+inverse-roi=0
+class-id=-1
